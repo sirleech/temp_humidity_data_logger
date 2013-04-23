@@ -106,15 +106,15 @@ void loop()
       String spreadsheet = "";
       spreadsheet.concat(aest.year());
       spreadsheet.concat("-");
-      spreadsheet.concat(aest.month());
+      spreadsheet.concat(padDigits(aest.month()));
       spreadsheet.concat("-");
-      spreadsheet.concat(aest.day());
+      spreadsheet.concat(padDigits(aest.day()));
       spreadsheet.concat(" ");
-      spreadsheet.concat(aest.hour());
+      spreadsheet.concat(padDigits(aest.hour()));
       spreadsheet.concat(":");
-      spreadsheet.concat(aest.minute());
+      spreadsheet.concat(padDigits(aest.minute()));
       spreadsheet.concat(":");
-      spreadsheet.concat(aest.second());
+      spreadsheet.concat(padDigits(aest.second()));
 
       // make the string
       dataString.concat(now.unixtime());
@@ -139,9 +139,19 @@ void loop()
   
   // take a reading every 5 mins...
   if (loopCount > 0)
-    delay(300000);
+    delay(5000);
+    //delay(300000);
   
   loopCount ++;
+}
+
+String padDigits(int input) {
+  String outputStr = "";
+  if (input < 10) {
+    outputStr.concat("0");
+  }
+  outputStr.concat(input);
+  return outputStr;
 }
 
 
