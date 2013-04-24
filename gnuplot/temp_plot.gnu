@@ -12,4 +12,4 @@ set ylabel 'Temperature (C)'
 
 set xtics rotate
 
-plot 'DATA.CSV' using 1:2
+plot '../sample_data/DATA.CSV' using 1:2
