@@ -138,10 +138,11 @@ void loop()
   dataFile.close();
 
   // take a reading every ..
-  if (loopCount > 0)
+  if (loopCount > 0) {
     delay(5000);
     //5 minutes
-  //delay(300000);
+    delay(300000);
+  }
 
   loopCount ++;
 }
@@ -158,6 +159,7 @@ String padDigits(int input) {
 String quote(String input) {
   return "\"" + input + "\""; 
 }
+
 
 
 
