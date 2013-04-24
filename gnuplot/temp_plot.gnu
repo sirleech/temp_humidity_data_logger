@@ -7,9 +7,9 @@ set xdata time
 set timefmt "%s"
 set format x "%m/%d/%Y %H:%M:%S"
 
-set xlabel 'Time'
+set xlabel 'Time AEST'
 set ylabel 'Temperature (C)'
 
 set xtics rotate
 
-plot 'DATA.CSV' using 1:3 with linespoints
+plot 'DATA.CSV' using 1:2

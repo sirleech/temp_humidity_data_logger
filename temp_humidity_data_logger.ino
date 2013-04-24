@@ -78,9 +78,7 @@ void loop()
 
   // write the first row as col headers
   if (loopCount == 0 && dataFile.size() == 0) {
-    dataString.concat("Time (POSIX)");
-    dataString.concat(",");
-    dataString.concat("Time (ISO)");
+    dataString.concat("Time (UNIX)");
     dataString.concat(",");
     dataString.concat("Temperature (c)");
     dataString.concat(",");
@@ -102,24 +100,8 @@ void loop()
       dtostrf(h,0,2,humBuff);
       dtostrf(t,0,2,tempBuff);
 
-      // make spreadsheet time
-      String spreadsheet = "";
-      spreadsheet.concat(aest.year());
-      spreadsheet.concat("-");
-      spreadsheet.concat(padDigits(aest.month()));
-      spreadsheet.concat("-");
-      spreadsheet.concat(padDigits(aest.day()));
-      spreadsheet.concat(" ");
-      spreadsheet.concat(padDigits(aest.hour()));
-      spreadsheet.concat(":");
-      spreadsheet.concat(padDigits(aest.minute()));
-      spreadsheet.concat(":");
-      spreadsheet.concat(padDigits(aest.second()));
-
       // make the string
-      dataString.concat(quote(String(aest.unixtime())));
-      dataString.concat(",");
-      dataString.concat(quote(spreadsheet));
+      dataString.concat(quote(String(now.unixtime())));
       dataString.concat(",");
       dataString.concat(quote(String(tempBuff)));
       dataString.concat(",");
