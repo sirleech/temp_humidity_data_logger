@@ -58,7 +58,7 @@ void setup()
     return;
   }
   Serial.println("card initialized.");
-  
+
   dht.begin();
 }
 
@@ -66,7 +66,7 @@ void loop()
 {
   // time
   DateTime now = RTC.now();
-  
+
   // utc+ 10
   DateTime aest (now.unixtime() + 36000);
 
@@ -101,7 +101,7 @@ void loop()
       char humBuff[10], tempBuff[10];
       dtostrf(h,0,2,humBuff);
       dtostrf(t,0,2,tempBuff);
-      
+
       // make spreadsheet time
       String spreadsheet = "";
       spreadsheet.concat(aest.year());
@@ -117,15 +117,15 @@ void loop()
       spreadsheet.concat(padDigits(aest.second()));
 
       // make the string
-      dataString.concat(now.unixtime());
+      dataString.concat(quote(String(now.unixtime())));
       dataString.concat(",");
-      dataString.concat(spreadsheet);
+      dataString.concat(quote(spreadsheet));
       dataString.concat(",");
-      dataString.concat(String(tempBuff));
+      dataString.concat(quote(String(tempBuff)));
       dataString.concat(",");
-      dataString.concat(String(humBuff));
+      dataString.concat(quote(String(humBuff)));
       dataFile.println(dataString);
-      
+
       // print to the serial port too:
       Serial.println(dataString);
     }
@@ -134,14 +134,15 @@ void loop()
   else {
     Serial.println("error opening file");
   }
-  
+
   dataFile.close();
-  
-  // take a reading every 5 mins...
+
+  // take a reading every ..
   if (loopCount > 0)
     delay(5000);
-    //delay(300000);
-  
+    //5 minutes
+  //delay(300000);
+
   loopCount ++;
 }
 
@@ -153,6 +154,11 @@ String padDigits(int input) {
   outputStr.concat(input);
   return outputStr;
 }
+
+String quote(String input) {
+  return "\"" + input + "\""; 
+}
+
 
 
 
