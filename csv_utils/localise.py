@@ -11,7 +11,10 @@ writer.writerow(header)
 reader.next()
 for row in reader:
 	unix_time = row[0]
-	row[0] = int(unix_time) + 36000
+	# adjust time to local timezone
+	# utc + 10 AEST
+	offset = 10 * 60 * 60
+	row[0] = int(unix_time) + offset
 	writer.writerow(row)
 
 ifile.close()
