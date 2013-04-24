@@ -82,7 +82,7 @@ void loop()
     dataString.concat(",");
     dataString.concat("Temperature (c)");
     dataString.concat(",");
-    dataString.concat("Relative Humidity (%)");
+    dataString.concat("RH (%)");
     Serial.println(dataString);
     dataFile.println(dataString);
   }
@@ -101,11 +101,11 @@ void loop()
       dtostrf(t,0,2,tempBuff);
 
       // make the string
-      dataString.concat(quote(String(now.unixtime())));
+      dataString.concat(String(now.unixtime()));
       dataString.concat(",");
-      dataString.concat(quote(String(tempBuff)));
+      dataString.concat(String(tempBuff));
       dataString.concat(",");
-      dataString.concat(quote(String(humBuff)));
+      dataString.concat(String(humBuff));
       
       // check if returns are valid, if they are NaN (not a number) then something went wrong!
       if (isnan(t) || isnan(h)) {
