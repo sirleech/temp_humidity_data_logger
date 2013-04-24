@@ -117,7 +117,7 @@ void loop()
       spreadsheet.concat(padDigits(aest.second()));
 
       // make the string
-      dataString.concat(quote(String(now.unixtime())));
+      dataString.concat(quote(String(aest.unixtime())));
       dataString.concat(",");
       dataString.concat(quote(spreadsheet));
       dataString.concat(",");
@@ -141,7 +141,7 @@ void loop()
   if (loopCount > 0) {
     delay(5000);
     //5 minutes
-    delay(300000);
+    //delay(300000);
   }
 
   loopCount ++;
