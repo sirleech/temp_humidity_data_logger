@@ -136,17 +136,3 @@ void loop()
 
   loopCount ++;
 }
-
-String padDigits(int input) {
-  String outputStr = "";
-  if (input < 10) {
-    outputStr.concat("0");
-  }
-  outputStr.concat(input);
-  return outputStr;
-}
-
-String quote(String input) {
-  return "\"" + input + "\""; 
-}
-
