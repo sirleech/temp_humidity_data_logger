@@ -106,7 +106,15 @@ void loop()
       dataString.concat(quote(String(tempBuff)));
       dataString.concat(",");
       dataString.concat(quote(String(humBuff)));
-      dataFile.println(dataString);
+      
+      // check if returns are valid, if they are NaN (not a number) then something went wrong!
+      if (isnan(t) || isnan(h)) {
+        Serial.println("Failed to read from DHT");
+      } 
+      else {
+        // write the file
+        dataFile.println(dataString);
+      }
 
       // print to the serial port too:
       Serial.println(dataString);
@@ -141,6 +149,7 @@ String padDigits(int input) {
 String quote(String input) {
   return "\"" + input + "\""; 
 }
+
 
 
 
