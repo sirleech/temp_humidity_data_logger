@@ -129,9 +129,9 @@ void loop()
 
   // take a reading every ..
   if (loopCount > 0) {
-    delay(5000);
+    //delay(5000);
     //5 minutes
-    //delay(300000);
+    delay(300000);
   }
 
   loopCount ++;

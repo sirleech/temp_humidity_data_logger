@@ -12,4 +12,4 @@ set ylabel 'Relative Humidity %'
 
 set xtics rotate
 
-plot '../sample_data/localised.CSV' using 1:3
+plot '../sample_data/localised.CSV' using 1:3 with lines
