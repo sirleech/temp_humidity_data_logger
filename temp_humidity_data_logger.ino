@@ -129,7 +129,7 @@ void loop()
 
   // take a reading every minute..
   if (loopCount > 0) {
-    delay(1000*60);
+    delay(6000);
   }
 
   loopCount ++;
