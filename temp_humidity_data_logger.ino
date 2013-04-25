@@ -127,11 +127,9 @@ void loop()
 
   dataFile.close();
 
-  // take a reading every ..
+  // take a reading every minute..
   if (loopCount > 0) {
-    //delay(5000);
-    //5 minutes
-    delay(5000);
+    delay(1000*60);
   }
 
   loopCount ++;
