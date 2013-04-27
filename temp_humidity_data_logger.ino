@@ -33,6 +33,8 @@ const int chipSelect = 10;
 
 DHT dht(DHTPIN, DHTTYPE);
 int loopCount = 0;
+uint32_t utc_offset_hrs = 10;
+uint32_t utc_offset_secs;
 
 void setup()
 {
@@ -60,6 +62,8 @@ void setup()
   Serial.println("card initialized.");
 
   dht.begin();
+
+  utc_offset_secs = (utc_offset_hrs * 60) * 60;
 }
 
 void loop()
@@ -68,7 +72,7 @@ void loop()
   DateTime now = RTC.now();
 
   // utc+ 10
-  DateTime aest (now.unixtime() + 36000);
+  DateTime aest (now.unixtime() + utc_offset_secs);
 
   // open the file. note that only one file can be open at a time,
   // so you have to close this one before opening another.
@@ -106,6 +110,20 @@ void loop()
       dataString.concat(String(tempBuff));
       dataString.concat(",");
       dataString.concat(String(humBuff));
+
+      // make human readable spreadsheet time
+      String spreadsheet = "";
+      spreadsheet.concat(aest.year());
+      spreadsheet.concat("-");
+      spreadsheet.concat(padDigits(aest.month()));
+      spreadsheet.concat("-");
+      spreadsheet.concat(padDigits(aest.day()));
+      spreadsheet.concat(" ");
+      spreadsheet.concat(padDigits(aest.hour()));
+      spreadsheet.concat(":");
+      spreadsheet.concat(padDigits(aest.minute()));
+      spreadsheet.concat(":");
+      spreadsheet.concat(padDigits(aest.second()));
       
       // check if returns are valid, if they are NaN (not a number) then something went wrong!
       if (isnan(t) || isnan(h)) {
@@ -117,7 +135,8 @@ void loop()
       }
 
       // print to the serial port too:
-      Serial.println(dataString);
+      	Serial.println(spreadsheet);
+	Serial.println(dataString);
     }
   }  
   // if the file isn't open, pop up an error:
@@ -129,8 +148,21 @@ void loop()
 
   // take a reading every minute..
   if (loopCount > 0) {
-    delay(6000);
+    delay(10000);
   }
 
   loopCount ++;
+}
+
+/////////////////////////
+/////////////////////// functions
+//////////////////////////////////
+
+String padDigits(int input) {
+  String outputStr = "";
+  if (input < 10) {
+    outputStr.concat("0");
+  }
+  outputStr.concat(input);
+  return outputStr;
 }
