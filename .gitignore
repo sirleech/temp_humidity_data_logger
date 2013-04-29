@@ -1,3 +1,4 @@
-sample_data/
+sample_data/DATA.csv
+sample_data/local*
 .DS*
 *~
