@@ -33,7 +33,10 @@ const int chipSelect = 10;
 
 DHT dht(DHTPIN, DHTTYPE);
 int loopCount = 0;
+
+// set below variable to your local timezone
 uint32_t utc_offset_hrs = 10;
+
 uint32_t utc_offset_secs;
 
 void setup()
